@@ -1,10 +1,17 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const app = express().use(bodyParser.json)
+const app = express()
+ 
 
-app.get('/', (req, res) => res.send('WebHook is running'))
+ 
+// parse application/json
+app.use(bodyParser.json())
+ 
+app.get('/', (req, res)=>{
+  res.send('WebHook is running')
+})
 
-app.listen(process.env.PORT || 1337, () => console.log('Webhook listening on port 3000!'))
+
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
@@ -59,3 +66,5 @@ app.post('/webhook', (req, res) => {
     }
   
   });   
+
+  app.listen(3000, () => console.log('Webhook listening on port 3000'))
